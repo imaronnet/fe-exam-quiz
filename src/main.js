@@ -112,6 +112,12 @@ const renderChoices = (question) =>
 
 const renderQuestionScreen = () => {
   const question = questions[state.currentIndex]
+
+  if (!question) {
+    renderResultScreen()
+    return
+  }
+
   const answered = state.selectedIndex !== null
   const isCorrect = answered && state.selectedIndex === question.correctIndex
 
