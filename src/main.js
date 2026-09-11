@@ -51,6 +51,14 @@ const answerQuestion = (choiceIndex) => {
     return
   }
 
+  if (
+    !Number.isInteger(choiceIndex)
+    || choiceIndex < 0
+    || choiceIndex >= question.choices.length
+  ) {
+    return
+  }
+
   const isCorrect = choiceIndex === question.correctIndex
 
   state.selectedIndex = choiceIndex
