@@ -10,6 +10,10 @@ const state = {
 
 const app = document.querySelector('#app')
 
+if (!app) {
+  throw new Error('Application root "#app" was not found.')
+}
+
 const escapeHtml = (value) =>
   value
     .replaceAll('&', '&amp;')
@@ -147,20 +151,6 @@ const renderQuestionScreen = () => {
 
 const renderResultScreen = () => {
   const total = questions.length
-
-  if (total === 0) {
-    app.innerHTML = `
-      <main class="screen">
-        <section class="card result-card">
-          <p class="eyebrow">お知らせ</p>
-          <h1 class="result-score">問題データがありません</h1>
-          <p class="result-message">アプリ内のサンプル問題を確認してください。</p>
-        </section>
-      </main>
-    `
-    return
-  }
-
   const percentage = Math.round((state.score / total) * 100)
 
   app.innerHTML = `
@@ -176,8 +166,22 @@ const renderResultScreen = () => {
   `
 }
 
+const renderEmptyState = () => {
+  app.innerHTML = `
+    <main class="screen">
+      <section class="card result-card">
+        <p class="eyebrow">お知らせ</p>
+        <h1 class="result-score">問題データがありません</h1>
+        <p class="result-message">アプリ内のサンプル問題を確認してください。</p>
+      </section>
+    </main>
+  `
+}
+
 function render() {
-  if (state.currentIndex >= questions.length) {
+  if (questions.length === 0) {
+    renderEmptyState()
+  } else if (state.currentIndex >= questions.length) {
     renderResultScreen()
   } else {
     renderQuestionScreen()
