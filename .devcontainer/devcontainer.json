@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
   "postCreateCommand": "npm ci",
   "postAttachCommand": {
-    "server": "bash -lc 'PID_FILE=/tmp/fe-exam-quiz-vite.pid; LOG_FILE=/tmp/fe-exam-quiz-vite.log; if [ -f \"$PID_FILE\" ] && kill -0 \"$(cat \"$PID_FILE\")\" 2>/dev/null; then exit 0; fi; npm run dev -- --host 0.0.0.0 >\"$LOG_FILE\" 2>&1 & echo $! >\"$PID_FILE\"'"
+    "server": "bash -lc 'PID_FILE=/tmp/fe-exam-quiz-vite.pid; LOG_FILE=/tmp/fe-exam-quiz-vite.log; WORKSPACE_DIR=$(pwd -P); VITE_BIN=\"$WORKSPACE_DIR/node_modules/.bin/vite\"; if [ -f \"$PID_FILE\" ]; then PID=$(cat \"$PID_FILE\"); if [ -n \"$PID\" ] && [ -d \"/proc/$PID\" ] && [ \"$(readlink -f \"/proc/$PID/cwd\")\" = \"$WORKSPACE_DIR\" ] && ps -p \"$PID\" -o args= | grep -F \"$VITE_BIN --host 0.0.0.0\" >/dev/null; then exit 0; fi; rm -f \"$PID_FILE\"; fi; \"$VITE_BIN\" --host 0.0.0.0 >\"$LOG_FILE\" 2>&1 & echo $! >\"$PID_FILE\"'"
   },
   "forwardPorts": [5173],
   "portsAttributes": {
