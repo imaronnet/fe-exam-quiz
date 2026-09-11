@@ -22,6 +22,18 @@ if [ -f "$PID_FILE" ]; then
     if printf '%s' "$COMMAND" | grep -F -- "$VITE_BIN" >/dev/null \
       && printf '%s' "$COMMAND" | grep -F -- "--host 0.0.0.0" >/dev/null; then
       kill "$PID" 2>/dev/null || true
+
+      ATTEMPT=0
+      while ps -p "$PID" -o pid= >/dev/null 2>&1; do
+        ATTEMPT=$((ATTEMPT + 1))
+
+        if [ "$ATTEMPT" -ge 5 ]; then
+          kill -9 "$PID" 2>/dev/null || true
+          break
+        fi
+
+        sleep 1
+      done
     fi
   fi
 

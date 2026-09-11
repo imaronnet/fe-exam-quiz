@@ -39,6 +39,11 @@ const getResultMessage = (score, total) => {
   return '解説を確認しながら、もう一度挑戦してみましょう。'
 }
 
+const focusActiveScreen = () => {
+  const focusTarget = app.querySelector('[data-focus-target]')
+  focusTarget?.focus()
+}
+
 const answerQuestion = (choiceIndex) => {
   if (state.selectedIndex !== null) {
     return
@@ -127,7 +132,7 @@ const renderQuestionScreen = () => {
   const isCorrect = answered && state.selectedIndex === question.correctIndex
 
   app.innerHTML = `
-    <main class="screen">
+    <main class="screen" aria-live="polite">
       <section class="card">
         <header class="card-header">
           <p class="eyebrow">基本情報技術者試験 4択クイズ</p>
@@ -137,7 +142,7 @@ const renderQuestionScreen = () => {
           </div>
         </header>
 
-        <h1 class="question">${escapeHtml(question.text)}</h1>
+        <h1 class="question" tabindex="-1" data-focus-target>${escapeHtml(question.text)}</h1>
 
         <div class="choices">
           ${renderChoices(question)}
@@ -175,10 +180,10 @@ const renderResultScreen = () => {
   const resultMessage = escapeHtml(getResultMessage(state.score, total))
 
   app.innerHTML = `
-    <main class="screen">
+    <main class="screen" aria-live="polite">
       <section class="card result-card">
         <p class="eyebrow">結果</p>
-        <h1 class="result-score">${state.score} / ${total} 問 正解</h1>
+        <h1 class="result-score" tabindex="-1" data-focus-target>${state.score} / ${total} 問 正解</h1>
         <p class="result-rate">正答率 ${percentage}%</p>
         <p class="result-message">${resultMessage}</p>
         <button class="primary-button" type="button" data-action="reset">もう一度挑戦する</button>
@@ -207,6 +212,8 @@ function render() {
   } else {
     renderQuestionScreen()
   }
+
+  focusActiveScreen()
 }
 
 app.addEventListener('click', (event) => {
