@@ -4,7 +4,8 @@ set -eu
 
 PID_FILE=/tmp/fe-exam-quiz-vite.pid
 LOG_FILE=/tmp/fe-exam-quiz-vite.log
-WORKSPACE_DIR=$(pwd)
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+WORKSPACE_DIR=$(dirname "$SCRIPT_DIR")
 VITE_BIN="$WORKSPACE_DIR/node_modules/.bin/vite"
 EXPECTED_COMMAND="$VITE_BIN --host 0.0.0.0"
 
