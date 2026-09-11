@@ -46,6 +46,11 @@ const answerQuestion = (choiceIndex) => {
   }
 
   const question = questions[state.currentIndex]
+
+  if (!question) {
+    return
+  }
+
   const isCorrect = choiceIndex === question.correctIndex
 
   state.selectedIndex = choiceIndex
@@ -156,6 +161,7 @@ const renderQuestionScreen = () => {
 const renderResultScreen = () => {
   const total = questions.length
   const percentage = total === 0 ? 0 : Math.round((state.score / total) * 100)
+  const resultMessage = escapeHtml(getResultMessage(state.score, total))
 
   app.innerHTML = `
     <main class="screen">
@@ -163,7 +169,7 @@ const renderResultScreen = () => {
         <p class="eyebrow">結果</p>
         <h1 class="result-score">${state.score} / ${total} 問 正解</h1>
         <p class="result-rate">正答率 ${percentage}%</p>
-        <p class="result-message">${getResultMessage(state.score, total)}</p>
+        <p class="result-message">${resultMessage}</p>
         <button class="primary-button" type="button" data-action="reset">もう一度挑戦する</button>
       </section>
     </main>
