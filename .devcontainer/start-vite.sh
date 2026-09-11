@@ -21,7 +21,7 @@ if [ -f "$PID_FILE" ]; then
 
     if printf '%s' "$COMMAND" | grep -F -- "$VITE_BIN" >/dev/null \
       && printf '%s' "$COMMAND" | grep -F -- "--host 0.0.0.0" >/dev/null; then
-      exit 0
+      kill "$PID" 2>/dev/null || true
     fi
   fi
 

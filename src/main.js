@@ -5,7 +5,6 @@ const state = {
   currentIndex: 0,
   selectedIndex: null,
   score: 0,
-  answers: [],
 }
 
 const app = document.querySelector('#app')
@@ -62,11 +61,6 @@ const answerQuestion = (choiceIndex) => {
   const isCorrect = choiceIndex === question.correctIndex
 
   state.selectedIndex = choiceIndex
-  state.answers.push({
-    questionIndex: state.currentIndex,
-    selectedIndex: choiceIndex,
-    isCorrect,
-  })
 
   if (isCorrect) {
     state.score += 1
@@ -89,7 +83,6 @@ const resetQuiz = () => {
   state.currentIndex = 0
   state.selectedIndex = null
   state.score = 0
-  state.answers = []
   render()
 }
 
