@@ -1,0 +1,25 @@
+{
+  "name": "FE Exam Quiz",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22.12.0"
+    }
+  },
+  "postCreateCommand": "npm ci",
+  "postAttachCommand": {
+    "server": ".devcontainer/start-vite.sh"
+  },
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": {
+      "label": "FE Exam Quiz",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    }
+  }
+}
