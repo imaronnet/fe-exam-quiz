@@ -1,6 +1,11 @@
 {
   "name": "FE Exam Quiz",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22.12.0"
+    }
+  },
   "postCreateCommand": "npm ci",
   "postAttachCommand": {
     "server": ".devcontainer/start-vite.sh"
