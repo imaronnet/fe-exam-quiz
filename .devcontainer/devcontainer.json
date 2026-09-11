@@ -1,0 +1,20 @@
+{
+  "name": "FE Exam Quiz",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "postCreateCommand": "npm ci",
+  "postAttachCommand": {
+    "server": "bash -lc 'pgrep -f \"vite --host 0.0.0.0\" >/dev/null || (npm run dev -- --host 0.0.0.0 >/tmp/fe-exam-quiz-vite.log 2>&1 &)'"
+  },
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": {
+      "label": "FE Exam Quiz",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    }
+  }
+}

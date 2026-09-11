@@ -1,18 +1,24 @@
 # FE Exam Quiz
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/imaronnet/fe-exam-quiz)
+
 基本情報技術者試験（FE）の4択問題を手軽に練習できる、小さなVite製Webアプリです。
 
-## セットアップ
+## GitHub Codespacesで最短起動
+
+1. 上の **Open in GitHub Codespaces** をクリック
+2. Codespaceの作成完了を待つ
+3. 依存関係のインストールとVite開発サーバーの起動が自動実行されます
+4. 自動で開くプレビュー、または **Ports** タブの `5173` を開く
+
+Codespaces用に `.devcontainer` を含めているため、追加セットアップなしで始めやすくしています。
+
+## ローカルセットアップ
 
 Node.js `^20.19.0` または `>=22.12.0` を想定しています。
 
 ```bash
 npm install
-```
-
-## ローカル起動
-
-```bash
 npm run dev
 ```
 
