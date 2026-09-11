@@ -76,6 +76,10 @@ const answerQuestion = (choiceIndex) => {
 }
 
 const moveToNextQuestion = () => {
+  if (state.selectedIndex === null) {
+    return
+  }
+
   state.currentIndex += 1
   state.selectedIndex = null
   render()
