@@ -23,6 +23,10 @@ const escapeHtml = (value) =>
     .replaceAll("'", '&#39;')
 
 const getResultMessage = (score, total) => {
+  if (total === 0) {
+    return 'アプリ内のサンプル問題を確認してください。'
+  }
+
   const rate = score / total
 
   if (rate === 1) {
