@@ -1,2 +1,35 @@
-# fe-exam-quiz
-A small web app for basic information technology exam multiple-choice practice
+# FE Exam Quiz
+
+基本情報技術者試験（FE）の4択問題を手軽に練習できる、小さなVite製Webアプリです。
+
+## セットアップ
+
+Node.js 20 以上を想定しています。
+
+```bash
+npm install
+```
+
+## ローカル起動
+
+```bash
+npm run dev
+```
+
+起動後、表示されるURL（通常は `http://localhost:5173`）をブラウザで開いてください。
+
+## ビルド
+
+```bash
+npm run build
+```
+
+## アプリの内容
+
+- 問題を1問ずつ表示
+- 4択から回答
+- 回答後に正誤と解説を表示
+- 最後にスコアを表示
+- もう一度最初からやり直し可能
+
+問題データはサンプルとしてアプリ内に直接含めているため、外部APIや追加データなしですぐ動きます。
