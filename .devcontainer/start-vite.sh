@@ -28,5 +28,6 @@ if [ -f "$PID_FILE" ]; then
   rm -f "$PID_FILE"
 fi
 
+cd "$WORKSPACE_DIR"
 "$VITE_BIN" --host 0.0.0.0 >"$LOG_FILE" 2>&1 &
 echo $! >"$PID_FILE"
