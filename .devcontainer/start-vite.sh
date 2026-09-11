@@ -7,7 +7,6 @@ LOG_FILE=/tmp/fe-exam-quiz-vite.log
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WORKSPACE_DIR=$(dirname "$SCRIPT_DIR")
 VITE_BIN="$WORKSPACE_DIR/node_modules/.bin/vite"
-EXPECTED_COMMAND="$VITE_BIN --host 0.0.0.0"
 
 if [ ! -x "$VITE_BIN" ]; then
   echo "Vite binary not found at $VITE_BIN. Run npm ci first." >&2
@@ -17,8 +16,13 @@ fi
 if [ -f "$PID_FILE" ]; then
   PID=$(cat "$PID_FILE")
 
-  if [ -n "$PID" ] && ps -p "$PID" -o args= 2>/dev/null | grep -F "$EXPECTED_COMMAND" >/dev/null; then
-    exit 0
+  if [ -n "$PID" ]; then
+    COMMAND=$(ps -p "$PID" -o args= 2>/dev/null || true)
+
+    if printf '%s' "$COMMAND" | grep -F -- "$VITE_BIN" >/dev/null \
+      && printf '%s' "$COMMAND" | grep -F -- "--host 0.0.0.0" >/dev/null; then
+      exit 0
+    fi
   fi
 
   rm -f "$PID_FILE"
