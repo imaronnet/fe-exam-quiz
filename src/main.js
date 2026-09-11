@@ -155,7 +155,7 @@ const renderQuestionScreen = () => {
 
 const renderResultScreen = () => {
   const total = questions.length
-  const percentage = Math.round((state.score / total) * 100)
+  const percentage = total === 0 ? 0 : Math.round((state.score / total) * 100)
 
   app.innerHTML = `
     <main class="screen">

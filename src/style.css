@@ -99,8 +99,8 @@ button {
 }
 
 .choice-button:hover:not(:disabled),
-.primary-button:hover,
-.secondary-button:hover {
+.primary-button:hover:not(:disabled),
+.secondary-button:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
 }
